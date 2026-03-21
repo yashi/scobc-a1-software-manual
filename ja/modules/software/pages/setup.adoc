@@ -1,6 +1,6 @@
 = Setup the Development Environment
 
-WARNING: ソフトウェアセクションは、日本語版がありません。
+NOTE: ソフトウェアセクションは、日本語版がありません。
 
 == Prepare the Software
 
