@@ -6,7 +6,7 @@
 
 == Introduction
 
-This section explains how to develop applications using Zephyr Driver. +
+This section explains how to develop applications using Zephyr Driver.
 Several sample applications are provided to explain how to check the Device Tree and how to use drivers.
 
 == GPIO Driver sample
@@ -18,7 +18,7 @@ The sample application is available in https://github.com/spacecubics/scobc-a1-s
 
 ==== Directory Name
 
-The directory name and structure for the sample application can be chosen freely. +
+The directory name and structure for the sample application can be chosen freely.
 In this example, we use the directory name `samples/blinky`.
 
 ==== CMakeLists.txt
@@ -45,7 +45,7 @@ Here, the parts that need to be modified for each application are explained.
 
 ==== prj.conf
 
-Additional _Kconfig_ parameters required for running the application can be specified. +
+Additional _Kconfig_ parameters required for running the application can be specified.
 As this example uses GPIO, it is necessary to set `CONFIG_GPIO=y`.
 
 [source]
@@ -108,7 +108,7 @@ end:
 
 ===== GPIO Device structure
 
-The SC-OBC Module A1 is equipped with AMD (formerly Xilinx)'s AXI GPIO IP core, which connects to 10 GPIOs. +
+The SC-OBC Module A1 is equipped with AMD (formerly Xilinx)'s AXI GPIO IP core, which connects to 10 GPIOs.
 The relationship between the GPIOs and the User IO pins is as follows, with `GPIO15` connected to the _LED11_ on the Development Board.
 
 .GPIO pins List
@@ -127,7 +127,7 @@ The relationship between the GPIOs and the User IO pins is as follows, with `GPI
 |UIO2_06|GPIO6
 |=======================
 
-Referring to the https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[DTS overlay file for Development Board], it can be seen that `GPIO15` of the GPIO IP core is defined with the device name `user_led_0`. +
+Referring to the https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[DTS overlay file for Development Board], it can be seen that `GPIO15` of the GPIO IP core is defined with the device name `user_led_0`.
 Additionally, an `led0` is assigned using the alias, which is used by Zephyr's blinky sample. However, this alias is not mandatory.
 
 [source, dts]
@@ -295,7 +295,7 @@ The sample application is available in https://github.com/spacecubics/scobc-a1-s
 
 ==== Directory Name
 
-The directory name and structure for the sample application can be chosen freely. +
+The directory name and structure for the sample application can be chosen freely.
 In this example, we use the directory name `samples/i2c`.
 
 ==== CMakeLists.txt
@@ -322,9 +322,9 @@ Here, the parts that need to be modified for each application are explained.
 
 ==== prj.conf
 
-Additional Kconfig parameters required for running the application can be specified. +
-As this example uses I2C, it is necessary to set `CONFIG_I2C=y`. +
-And, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`. +
+Additional Kconfig parameters required for running the application can be specified.
+As this example uses I2C, it is necessary to set `CONFIG_I2C=y`.
+And, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`.
 For more information about `CONFIG_PICOLIBC_IO_FLOAT`, refer to https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT].
 
 [source]
@@ -388,8 +388,8 @@ end:
 
 ===== Device structure
 
-To use the I2C driver API, it is necessary to obtain the corresponding device structure. +
-There are several APIs available for retrieving a device structure, but in this sample, `DEVICE_DT_GET` and `DT_NODELABEL` are used. +
+To use the I2C driver API, it is necessary to obtain the corresponding device structure.
+There are several APIs available for retrieving a device structure, but in this sample, `DEVICE_DT_GET` and `DT_NODELABEL` are used.
 The label name specified in `DT_NODELABEL` must match the label defined in the DTS file.
 The I2C device connected to the temperature sensor on the Development Board is defined in https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[DTS overlay file for Development Board].
 
@@ -400,10 +400,14 @@ Although three FPGA I2C cores are available on the Development Board, the temper
 	const struct device *i2c = DEVICE_DT_GET(DT_NODELABEL(i2c0));
 ----
 
-TIP: Because the DTS file may be defined across multiple sources via overlays, you may want to inspect the final merged DTS. +
-This merged DTS is available in the following file under the build directory. +
- +
+[TIP]
+====
+Because the DTS file may be defined across multiple sources via
+overlays, you may want to inspect the final merged DTS.  This merged
+DTS is available in the following file under the build directory.
+
 `~/myproject/build/zephyr/zephyr.dts`
+====
 
 ===== Validate that I2C device is ready
 
@@ -420,9 +424,9 @@ Validate that I2C device is ready. If the I2C device is not properly initialized
 
 ===== I2C driver API
 
-The APIs provided by the I2C driver are documented in the I2C interface. +
-In this example, it is necessary to read 2 bytes of temperature data from the sensor, so the `i2c_burst_read` API is used to perform a multi-byte read from the I2C device. +
-The second argument specifies the slave address of the I2C device. For the *TMP175* temperature sensor used in this example, the slave address is set to `0x4B`. +
+The APIs provided by the I2C driver are documented in the I2C interface.
+In this example, it is necessary to read 2 bytes of temperature data from the sensor, so the `i2c_burst_read` API is used to perform a multi-byte read from the I2C device.
+The second argument specifies the slave address of the I2C device. For the *TMP175* temperature sensor used in this example, the slave address is set to `0x4B`.
 The third argument specifies the register address from which the temperature data will be read.
 This register address must be obtained from the TMP175 datasheet.
 For TMP175, the temperature register address is `0x00`.
@@ -434,7 +438,7 @@ For TMP175, the temperature register address is `0x00`.
 
 ===== Calculate temperature data
 
-The TMP175 temperature data is represented in 12 bits, and its resolution is `0.0625`. Therefore, the raw value is converted before being printed to the console. +
+The TMP175 temperature data is represented in 12 bits, and its resolution is `0.0625`. Therefore, the raw value is converted before being printed to the console.
 For more details, please refer to the TMP175 datasheet.
 
 [source, c]

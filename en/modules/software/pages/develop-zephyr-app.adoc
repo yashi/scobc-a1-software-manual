@@ -3,7 +3,7 @@
 
 == Introduction
 
-This section explains how to develop applications using Zephyr's *T2 topology*. +
+This section explains how to develop applications using Zephyr's *T2 topology*.
 Several sample applications are provided to help explain the source code structure, build process, and other development practices.
 
 == What is T2 topology
@@ -16,14 +16,14 @@ Details of the T2 topology can be found in https://docs.zephyrproject.org/latest
 
 == Hello World sample
 
-This section provides an example of building and running the simplest Hello World application within a T2 topology-based repository. +
+This section provides an example of building and running the simplest Hello World application within a T2 topology-based repository.
 The sample application is available in https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/hello_world[Hello World sample].
 
 === Explain the sample code
 
 ==== Directory name
 
-The directory name and structure for the sample application can be chosen freely. +
+The directory name and structure for the sample application can be chosen freely.
 In this example, we use the directory name `samples/hello_world`.
 
 ==== CMakeLists.txt
@@ -50,7 +50,7 @@ Here, the parts that need to be modified for each application are explained.
 
 ==== prj.conf
 
-Additional *Kconfig* parameters required for running the application can be specified. +
+Additional *Kconfig* parameters required for running the application can be specified.
 For this Hello World application, no additional parameters are required, so leaving it empty is fine.
 
 [source]
@@ -60,7 +60,7 @@ For this Hello World application, no additional parameters are required, so leav
 
 ==== Source code
 
-The source code is equivalent to the sample code provided by Zephyr, but the displayed parameters have been modified. +
+The source code is equivalent to the sample code provided by Zephyr, but the displayed parameters have been modified.
 In the Zephyr sample code, `CONFIG_BOARD_TARGET` was displayed, but in this sample, the board name (`CONFIG_BOARD`) and the revision (`CONFIG_BOARD_REVISION`) are displayed separately.
 [source, c]
 ----
@@ -141,13 +141,13 @@ NOTE: The monitoring by TRCH is disabled by default, so using the FPGA Watchdog 
 
 SEM Controller::
 
-The *SEM (Soft Error Mitigation) Controller* is a solution provided by _AMD_ for detecting and correcting errors that occur in the configuration memory of AMD FPGAs. +
+The *SEM (Soft Error Mitigation) Controller* is a solution provided by _AMD_ for detecting and correcting errors that occur in the configuration memory of AMD FPGAs.
 The SC-OBC Module A1 FPGA integrates this functionality into the system and provides access to the SEM Controller's status through the System Monitor registers.
 
 Board Health Monitor (BHM)::
 
-The *Board Health Monitor (BHM)* is a feature that enables easy retrieval of data from sensors mounted on the SC-OBC Module A1. +
-The OBC module is equipped with two current and voltage monitors and three temperature sensors. +
+The *Board Health Monitor (BHM)* is a feature that enables easy retrieval of data from sensors mounted on the SC-OBC Module A1.
+The OBC module is equipped with two current and voltage monitors and three temperature sensors.
 The BHM allows automatic data acquisition from these sensors without requiring complex *I2C* operations in software.
 
 ==== System Monitor driver
@@ -213,7 +213,7 @@ The sample application is available in https://github.com/spacecubics/scobc-a1-s
 
 ==== Directory name
 
-The directory name and structure for the sample application can be chosen freely. +
+The directory name and structure for the sample application can be chosen freely.
 In this example, we use the directory name `samples/sysmon`.
 
 ==== CMakeLists.txt
@@ -240,8 +240,8 @@ Here, the parts that need to be modified for each application are explained.
 
 ==== prj.conf
 
-Additional Kconfig parameters required for running the application can be specified. +
-In this sample, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`. +
+Additional Kconfig parameters required for running the application can be specified.
+In this sample, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`.
 For more information about `CONFIG_PICOLIBC_IO_FLOAT`, refer to https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT].
 
 [source]
@@ -328,7 +328,7 @@ Enable the System Monitor by FPGA _BHM_. If a negative value is returned, sensor
 
 ===== Wait 1 second
 
-The current System Monitor driver API does not allow customization of the monitoring interval via BHM; +
+The current System Monitor driver API does not allow customization of the monitoring interval via BHM;
 it is fixed at 1 second. Therefore, wait for 1 second until the first data collection is completed.
 
 [source, c]
@@ -338,8 +338,8 @@ it is fixed at 1 second. Therefore, wait for 1 second until the first data colle
 
 ===== Get the on board temperature sensor value
 
-Get the temperature data from onboard temperature sensor 1 and display it on the console. +
-If a negative value is returned, it may indicate that the temperature sensor data has not been updated within the FPGA. +
+Get the temperature data from onboard temperature sensor 1 and display it on the console.
+If a negative value is returned, it may indicate that the temperature sensor data has not been updated within the FPGA.
 If you'd like to get other values, try changing the _SCOBC_A1_TEMP_1_ to a different parameter of your choice, as referenced in <<anchor-1,Table 1. System Monitor Driver API List>>
 
 [source, c]
@@ -354,8 +354,8 @@ If you'd like to get other values, try changing the _SCOBC_A1_TEMP_1_ to a diffe
 
 ===== Get the on board voltage sensor value
 
-Get the _3V3SYS_ BUS voltage value data from onboard voltage sensor and display it on the console. +
-If a negative value is returned, it may indicate that the voltage sensor data has not been updated within the FPGA. +
+Get the _3V3SYS_ BUS voltage value data from onboard voltage sensor and display it on the console.
+If a negative value is returned, it may indicate that the voltage sensor data has not been updated within the FPGA.
 If you'd like to get other values, try changing the _SCOBC_A1_3V3_BUS_ to a different parameter of your choice, as referenced in <<anchor-1,Table 1. System Monitor Driver API List>>
 
 [source, c]
