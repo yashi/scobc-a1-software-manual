@@ -2,6 +2,8 @@
 
 == Prepare the Software
 
+This section explains how to prepare the software development environment for the SC-OBC Module A1.
+
 === Target Platform
 
 This document targets *Ubuntu 24.04 x86_64* systems.
