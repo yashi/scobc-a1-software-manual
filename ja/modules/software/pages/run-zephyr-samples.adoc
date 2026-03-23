@@ -1,21 +1,22 @@
 = Run Zephyr Samples
 
-Zephyr provides many so-called *sample applications*. The Zephyr documentation has a dedicated page called *Samples and Demos*.
-In this section, we'll build a few samples from Zephyr and run them on your SC-OBC Module A1.
+Zephyr には、いわゆる サンプルアプリケーションが数多く用意されています。Zephyr のドキュメントには、*Samples and Demos* という専用ページがあります。
+このセクションでは、Zephyr のサンプルをいくつかビルドし、お使いの SC-OBC Module A1 で実行します。
 
-On the Samples and Demos page, you can interactively search samples. There are over 500 samples in Zephyr v4.1.
-Using the web interface is much easier than checking each sample's README.rst.
+Samples and Demos ページでは、サンプルを対話的に検索できます。Zephyr v4.1 には 500 を超えるサンプルがあります。
+各サンプルの `README.rst` を一つずつ確認するより、Web インターフェースを使うほうがはるかに簡単です。
 
-If you haven't created your workspace yet, go back to the previous section and do so.
-In this section, we assume you have already set up your development environment and are ready to proceed.
+まだワークスペースを作成していない場合は、前のセクションに戻って作成してください。
+このセクションでは、開発環境のセットアップがすでに完了しており、先に進める状態であることを前提とします。
 
-== Blinky sample
-The first sample is *Blinky*. This application blinks an LED on your Development Board.
+== Blinky サンプル
 
-CAUTION: For the *Blinky* sample, make sure that SW1[10] (LED control) is turned ON.
-If it is OFF, the LED will not blink.
+最初のサンプルは *Blinky* です。このアプリケーションは Development Board 上の LED を点滅させます。
 
-=== Build
+CAUTION: *Blinky* サンプルでは、SW1[10] (LED control) が ON になっていることを確認してください。
+OFF になっている場合、LED は点滅しません。
+
+=== ビルド
 
 [source, console]
 ----
@@ -24,39 +25,41 @@ source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev zephyr/samples/basic/blinky
 ----
 
-This should build your first application, Blinky.
+これで最初のアプリケーションである Blinky がビルドされます。
 
-These steps match the *Build the Blinky Sample* section in the Zephyr documentation.
+これらの手順は、Zephyr ドキュメントの *Build the Blinky Sample* セクションと一致しています。
 
-=== Flash
+=== 書き込み
 
-Next, we'll flash the SC-OBC Module A1:
+次に、SC-OBC Module A1 に書き込みます。
 
 [source, console]
 ----
 west flash
 ----
 
-=== Confirm
-After flashing, power-cycle the SC-OBC Module A1. You should see the blinking LED (_LED11_).
+=== 確認
 
-== Hello World sample
-Next is the ever-popular *Hello World* sample. Before running Hello World, we need to set up the serial connection so the module can send output to your PC.
+書き込み後、SC-OBC Module A1 の電源を入れ直してください。点滅する LED (_LED11_) が見えるはずです。
 
-=== Open Console
+== Hello World サンプル
 
-Connect the cable between your SC-OBC Module A1 and your PC, then open the console on terminal:
+次は定番の *Hello World* サンプルです。Hello World を実行する前に、モジュールが PC に出力を送れるよう、シリアル接続を設定する必要があります。
+
+=== コンソールを開く
+
+SC-OBC Module A1 と PC の間をケーブルで接続し、端末でコンソールを開いてください。
 
 [source, console]
 ----
 tio /dev/ttyUSB2
 ----
 
-CAUTION: To use the Zephyr console, bit3 (RX) and bit4 (TX) of DIP Switch (_SW1_) must be turned ON. If they are currently OFF, please switch them ON.
+CAUTION: Zephyr コンソールを使用するには、DIP スイッチ (_SW1_) の bit3 (RX) と bit4 (TX) を ON にする必要があります。現在 OFF の場合は、ON に切り替えてください。
 
-=== Build
+=== ビルド
 
-Then open the another terminal, and build the sample.
+次に、別の端末を開いてサンプルをビルドします。
 
 [source, console]
 ----
@@ -65,15 +68,15 @@ source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev zephyr/samples/hello_world
 ----
 
-=== Flash
+=== 書き込み
 
-Next, we'll flash the SC-OBC Module A1:
+次に、SC-OBC Module A1 に書き込みます。
 
 [source, console]
 ----
 west flash
 ----
 
-=== Confirm
-After power-cycle the SC-OBC Module A1, you should see the Hello World string on your serial console.
-If you want to exit the tio console, first press `Ctrl + t`, followed by `q`.
+=== 確認
+SC-OBC Module A1 の電源を入れ直すと、シリアルコンソールに Hello World の文字列が表示されるはずです。
+`tio` コンソールを終了したい場合は、まず `Ctrl + t` を押し、その後 `q` を押してください。

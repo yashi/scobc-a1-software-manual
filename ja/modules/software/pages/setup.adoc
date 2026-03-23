@@ -1,50 +1,50 @@
 = Setup the Development Environment
 
-NOTE: ソフトウェアセクションは、日本語版がありません。
+== ソフトウェアの準備
 
-== Prepare the Software
+=== 対象プラットフォーム
 
-=== Target Platform
+このドキュメントは、*Ubuntu 24.04 x86_64* システムを対象としています。
 
-This document is focused on *Ubuntu 24.04 x86_64* systems.
+以下のいずれかの環境を使用できます。
 
-You can use any of the following setups:
-
-* A PC with Ubuntu installed
-* A system container (e.g., Incus)
-* A virtual machine (e.g., QEMU, VirtualBox, VMware)
-* Windows Subsystem for Linux (WSL) (see TIP)
+* Ubuntu がインストールされた PC
+* システムコンテナ (例: Incus)
+* 仮想マシン (例: QEMU、VirtualBox、VMware)
+* Windows Subsystem for Linux (WSL)  (TIP を参照)
 
 :zephyr-getting-started: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 
-For Windows or macOS users, refer to {zephyr-getting-started}[the
-upstream Zephyr Getting Started Guide].
+Windows または macOS を使用している場合は、
+{zephyr-getting-started}[Zephyr の公式 Getting Started Guide]
+を参照してください。
 
 :zephyr-install-dependencies: https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies
 
 [TIP]
 ====
-According to {zephyr-install-dependencies}[the Install dependencies
-section on the upstream Zephyr Getting Started Guide], firmware
-flashing from WSL is not supported. However, for the SC-OBC Module A1
-Development Board, we have confirmed that flashing is possible on
-WSL. Detailed instructions for WSL user are provided in the
-<<Connect the Hardware>> section.
+{zephyr-install-dependencies}[Zephyr 公式 Getting Started Guide の
+Install dependencies セクション]によると、WSL
+からのファームウェア書き込みはサポートされていません。しかし、
+SC-OBC Module A1 Development Board では、WSL
+上でも書き込みが可能であることを確認しています。
+WSL 利用者向けの詳細な手順は、<<connect-hardware>> セクションに記載しています。
 ====
 
-=== Install Required Dependencies
-NOTE: This section is mostly the same as Zephyr official documentation.
+=== 必要な依存パッケージのインストール
 
-==== Update your system
+NOTE: このセクションは、ほぼ Zephyr 公式ドキュメントと同じです
 
-[source,  console]
+==== システムの更新
+
+[source, console]
 ----
 sudo apt update && sudo apt upgrade
 ----
 
-==== Install dependencies
+==== 依存パッケージのインストール
 
-[source,  console]
+[source, console]
 ----
 sudo apt install --no-install-recommends git cmake ninja-build gperf \
   ccache dfu-util device-tree-compiler wget \
@@ -52,44 +52,44 @@ sudo apt install --no-install-recommends git cmake ninja-build gperf \
   make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
 ----
 
-=== Get Zephyr and Python Requirements
+=== Zephyr と Python 要件の取得
 
-==== Create your working directory
+==== 作業ディレクトリの作成
 
 [source, console]
 ----
 mkdir -p ~/myproject && cd ~/myproject
 ----
 
-==== Install the Python venv package
+==== Python venv パッケージのインストール
 
 [source, console]
 ----
 sudo apt install python3-venv
 ----
 
-==== Create a new virtual environment
+==== 新しい仮想環境の作成
 
 [source, console]
 ----
 python3 -m venv ~/myproject/.venv
 ----
 
-==== Activate the virtual environment
+==== 仮想環境の有効化
 
 [source, console]
 ----
 source ~/myproject/.venv/bin/activate
 ----
 
-==== Install the west
+==== west のインストール
 
 [source, console]
 ----
 pip install west
 ----
 
-==== Clone the SC-OBC Module A1 sample repository using west
+==== west を使って SC-OBC Module A1 サンプルリポジトリをクローンする
 
 [source, console]
 ----
@@ -99,23 +99,23 @@ west update
 west zephyr-export
 ----
 
-==== Install the Python requirements
+==== Python 要件のインストール
 
 [source, console]
 ----
 west packages pip --install
 ----
 
-=== Install the Zephyr SDK
+=== Zephyr SDK のインストール
 
 [source, console]
 ----
 west sdk install
 ----
 
-=== Install udev rules
+=== udev ルールのインストール
 
-Install the udev rules, which allow you to flash most Zephyr boards as a regular user.
+udev ルールをインストールします。これにより、通常ユーザーでも多くの Zephyr ボードへ書き込みできるようになります。
 
 [source, console]
 ----
@@ -124,18 +124,18 @@ sudo cp ~/zephyr-sdk-[VERSION]/sysroots/x86_64-pokysdk-linux/usr/share/openocd/c
 sudo udevadm control --reload
 ----
 
-=== Install the OpenOCD related package
+=== OpenOCD 関連パッケージのインストール
 
-Install the packages required for flashing via *OpenOCD*.
+*OpenOCD* による書き込みに必要なパッケージをインストールします。
 
 [source, console]
 ----
 sudo apt install libftdi1 libgpiod2 libhidapi-hidraw0 libcapstone4
 ----
 
-=== Install the tio package
+=== tio パッケージのインストール
 
-Although there are several tools available for working with a serial console, this document uses *tio*.
+シリアルコンソールを扱うためのツールはいくつかありますが、このドキュメントでは *tio* を使用します。
 
 [source, console]
 ----
@@ -143,38 +143,41 @@ sudo apt install tio
 ----
 
 [id="connect-hardware"]
-== Connect the Hardware
+== ハードウェアの接続
 
-Before starting development, make sure you have the following components:
+開発を始める前に、以下の部品がそろっていることを確認してください。
 
 * ✔️ SC-OBC Module A1
 * ✔️ SC-OBC Module A1 Development Board
-* ✔️ USB Micro-B Cable
-* ✔️ AC Adapter (5V/3.0A PL03B)
+* ✔️ USB Micro-B ケーブル
+* ✔️ AC アダプタ (5V/3.0A PL03B)
 
-Refer to _SC-OBC Module A1 Development Board Product Manual_ for
-detailed instructions on how to make the connection.
+接続方法の詳細については、
+_SC-OBC Module A1 Development Board Product Manual_
+を参照してください。
 
-NOTE: This document does not require a connection between the *MPLAB PICkit* and the *Platform Cable USB II*.
+NOTE: このドキュメントでは、*MPLAB PICkit* と *Platform Cable USB II* の接続は必要ありません。
 
 :wsl-usb-connect: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
 
-=== For WSL User
-CON2 on the SC-OBC Module A1 Development Board is the USB Micro-B
-DEBUG interface and is connected to the onboard FT4232H USB
-interface. It provides FPGA JTAG, CPU JTAG, FPGA UART, and TRCH UART.
+=== WSL 利用者向け
+SC-OBC Module A1 Development Board の CON2 は USB Micro-B の
+DEBUG インターフェースであり、オンボードの FT4232H USB
+インターフェースに接続されています。これにより FPGA JTAG、
+CPU JTAG、FPGA UART、TRCH UART が利用できます。
 
-Use a USB cable to connect CON2 to your Windows PC, then attach it to
-WSL using {wsl-usb-connect}[Microsoft’s USB connection guide].
+USB ケーブルで CON2 を Windows PC に接続し、その後
+{wsl-usb-connect}[Microsoft の USB 接続ガイド]に従って WSL に
+アタッチしてください。
 
-To attach the device to WSL, run `usbipd list` on Windows and
-identify the FTDI multi-port USB device for CON2 (VID:PID
-0403:6011). You need the `BUSID` from this output for the `usbipd
-bind` and `usbipd attach` command. The device name may be truncated in
-the DEVICE column, but the VID:PID (0403:6011) is sufficient to
-identify it.
+デバイスを WSL にアタッチするには、Windows 上で `usbipd list`
+を実行し、CON2 に対応する FTDI マルチポート USB デバイス
+(VID:PID 0403:6011) を確認します。この出力から `BUSID` を取得し、
+`usbipd bind` および `usbipd attach` コマンドで使用します。
+DEVICE 列のデバイス名は途中で切れて表示される場合がありますが、
+VID:PID (0403:6011) で識別できます。
 
-Example (`BUSID` may differ on your system):
+例 (`BUSID` は環境によって異なる場合があります) :
 
 [source, console]
 ----
@@ -185,7 +188,7 @@ BUSID  VID:PID    DEVICE                                                        
 9-1    0403:6011  USB Serial Converter A, USB Serial Converter B, USB Seria...  Not shared
 ----
 
-Attach the device to WSL using the `BUSID` shown by `usbipd list`:
+`usbipd list` で表示された `BUSID` を使って、デバイスを WSL にアタッチしてください。
 
 [source, console]
 ----
@@ -193,15 +196,19 @@ usbipd bind --busid 9-1
 usbipd attach --wsl --busid 9-1
 ----
 
-After attaching, the serial ports appear in WSL as `/dev/ttyUSB*`.
+アタッチ後、シリアルポートは WSL 上で `/dev/ttyUSB*` として見えるようになります。
 
-NOTE: We have confirmed that the `west flash` command takes longer to complete on WSL compared
-to native Linux. (65 KBytes writing: WSL - about 1 minute / Native Linux – about 20 seconds)
+NOTE: `west flash` コマンドは、ネイティブ Linux と比べて
+WSL 上では完了までに時間がかかることを確認しています。
+(65 KBytes 書き込み時: WSL では約 1 分、Native Linux では約 20 秒)
 
-== Check the DIP Switch status
+== DIP スイッチの状態を確認する
 
-CAUTION: To use the Zephyr console, bit3 (RX) and bit4 (TX) of DIP Switch (_SW1_) must be turned ON. If they are currently OFF, please switch them ON.
+CAUTION: Zephyr コンソールを使用するには、DIP スイッチ (_SW1_) の
+bit3 (RX) と bit4 (TX) を ON にする必要があります。現在 OFF の場合は、
+ON に切り替えてください。
 
-== Power ON the SC-OBC Module A1 Development Board
+== SC-OBC Module A1 Development Board の電源を入れる
 
-Once all connections and checks have been completed, switch ON the power switch (_SW2_) on the Development Board to apply power.
+すべての接続と確認が完了したら、Development Board 上の電源スイッチ
+(_SW2_) を ON にして電源を投入してください。

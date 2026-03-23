@@ -1,34 +1,34 @@
 :scobc_a1_fpga_manual_sysmon_url: https://docs.spacecubics.com/scobc-a1-ja/latest/fpga/system_monitor.html
 = Develop Zephyr Applications
 
-== Introduction
+== はじめに
 
-This section explains how to develop applications using Zephyr's *T2 topology*.
-Several sample applications are provided to help explain the source code structure, build process, and other development practices.
+このセクションでは、Zephyr の *T2 トポロジー* を使ったアプリケーション開発方法を説明します。
+ソースコードの構成、ビルド方法、その他の開発上の実践を説明するために、いくつかのサンプルアプリケーションを用意しています。
 
-== What is T2 topology
+== T2 トポロジーとは
 
-Details of the T2 topology can be found in https://docs.zephyrproject.org/latest/develop/west/workspaces.html#t2-star-topology-application-is-the-manifest-repository[T2 topology], but it has the following characteristics:
+T2 トポロジーの詳細は https://docs.zephyrproject.org/latest/develop/west/workspaces.html#t2-star-topology-application-is-the-manifest-repository[T2 topology] にありますが、主に次の特徴があります。
 
- * Applications can be managed in a dedicated (custom) repository
- * Zephyr and other projects can be managed as submodules
- * Zephyr drivers can be managed out-of-tree in a dedicated (custom) repository
+ * アプリケーションを専用の (カスタム) リポジトリで管理できる
+ * Zephyr やその他のプロジェクトをサブモジュールとして管理できる
+ * Zephyr ドライバを専用の (カスタム) リポジトリで out-of-tree 管理できる
 
-== Hello World sample
+== Hello World サンプル
 
-This section provides an example of building and running the simplest Hello World application within a T2 topology-based repository.
-The sample application is available in https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/hello_world[Hello World sample].
+このセクションでは、T2 トポロジーベースのリポジトリ内で、最も単純な Hello World アプリケーションをビルドして実行する例を示します。
+サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/hello_world[Hello World sample] にあります。
 
-=== Explain the sample code
+=== サンプルコードの説明
 
-==== Directory name
+==== ディレクトリ名
 
-The directory name and structure for the sample application can be chosen freely.
-In this example, we use the directory name `samples/hello_world`.
+サンプルアプリケーションのディレクトリ名や構成は自由に決められます。
+この例では、ディレクトリ名として `samples/hello_world` を使用します。
 
 ==== CMakeLists.txt
 
-A `CMakeLists.txt` file must be placed directly under the application directory.
+`CMakeLists.txt` ファイルは、アプリケーションディレクトリの直下に配置する必要があります。
 
 [source, cmake]
 ----
@@ -43,25 +43,26 @@ project(hello-world)
 target_sources(app PRIVATE src/main.c)
 ----
 
-Here, the parts that need to be modified for each application are explained.
+ここでは、各アプリケーションごとに変更が必要となる箇所を説明します。
 
- * *project*: Specify the desired project name
- * *target_sources*: Specify the source code file(s)
+ * *project*: 任意のプロジェクト名を指定します
+ * *target_sources*: ソースコードファイルを指定します
 
 ==== prj.conf
 
-Additional *Kconfig* parameters required for running the application can be specified.
-For this Hello World application, no additional parameters are required, so leaving it empty is fine.
+アプリケーションの実行に必要な追加の *Kconfig* パラメータを指定できます。
+この Hello World アプリケーションでは追加パラメータは不要なので、空のままで問題ありません。
 
 [source]
 ----
 # nothing here
 ----
 
-==== Source code
+==== ソースコード
 
-The source code is equivalent to the sample code provided by Zephyr, but the displayed parameters have been modified.
-In the Zephyr sample code, `CONFIG_BOARD_TARGET` was displayed, but in this sample, the board name (`CONFIG_BOARD`) and the revision (`CONFIG_BOARD_REVISION`) are displayed separately.
+ソースコード自体は Zephyr が提供しているサンプルコードと同等ですが、表示するパラメータを変更しています。
+Zephyr のサンプルコードでは `CONFIG_BOARD_TARGET` を表示していましたが、このサンプルではボード名 (`CONFIG_BOARD`) とリビジョン (`CONFIG_BOARD_REVISION`) を分けて表示しています。
+
 [source, c]
 ----
 /*
@@ -80,22 +81,22 @@ int main(void)
 }
 ----
 
-TIP: The variable names starting with `CONFIG_` store parameters specified in Zephyr's Kconfig. To know all the Kconfig parameters, you can refer to the `~/myproject/build/zephyr/.config` file.
+TIP: `CONFIG_` で始まる変数名には、Zephyr の Kconfig で指定されたパラメータが格納されています。すべての Kconfig パラメータを確認したい場合は、`~/myproject/build/zephyr/.config` ファイルを参照してください。
 
-=== Open console
+=== コンソールを開く
 
-Connect the cable between your SC-OBC Module A1 and your PC, then open the console in a terminal:
+SC-OBC Module A1 と PC の間をケーブルで接続し、端末でコンソールを開いてください。
 
 [source, console]
 ----
 tio /dev/ttyUSB2
 ----
 
-CAUTION: To use the Zephyr console, bit3 (RX) and bit4 (TX) of DIP Switch (_SW1_) must be turned ON. If they are currently OFF, please switch them ON.
+CAUTION: Zephyr コンソールを使用するには、DIP スイッチ (_SW1_) の bit3 (RX) と bit4 (TX) を ON にする必要があります。現在 OFF の場合は、ON に切り替えてください。
 
-=== Build
+=== ビルド
 
-Specify the sample application directory where `CMakeLists.txt` and `prj.conf` are placed, and then build as shown below.
+`CMakeLists.txt` と `prj.conf` が配置されているサンプルアプリケーションのディレクトリを指定して、以下のようにビルドします。
 
 [source, console]
 ----
@@ -104,18 +105,18 @@ source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev scobc-a1-sample/samples/hello_world
 ----
 
-=== Flash
+=== 書き込み
 
-Next, we'll flash the SC-OBC Module A1:
+次に、SC-OBC Module A1 に書き込みます。
 
 [source, console]
 ----
 west flash
 ----
 
-=== Confirm
+=== 確認
 
-After power-cycling the SC-OBC Module A1, you should see the "Hello World" string on the console along with the board name and revision.
+SC-OBC Module A1 の電源を入れ直すと、コンソールにボード名とリビジョン付きで "Hello World" の文字列が表示されるはずです。
 
 [source, console]
 ----
@@ -123,61 +124,61 @@ After power-cycling the SC-OBC Module A1, you should see the "Hello World" strin
 Hello World! scobc_a1 Rev 2.0.0
 ----
 
-If you want to exit the tio console, first press `Ctrl + t`, followed by `q`.
+`tio` コンソールを終了したい場合は、まず `Ctrl + t` を押し、その後 `q` を押してください。
 
-== System Monitor sample
+== System Monitor サンプル
 
-This section provides an example of building and running the *System Monitor* application within a T2 topology-based repository.
+このセクションでは、T2 トポロジーベースのリポジトリ内で *System Monitor* アプリケーションをビルドして実行する例を示します。
 
-=== What is the System Monitor
+=== System Monitor とは
 
-Details of the System Monitor can be found in {scobc_a1_fpga_manual_sysmon_url}[System Monitor] (Now Japanese only), but it has the following characteristics:
+System Monitor の詳細は {scobc_a1_fpga_manual_sysmon_url}[System Monitor] (現時点では日本語のみ) にありますが、主に次の特徴があります。
 
 FPGA Watchdog::
 
-The system of the SC-OBC Module A1 is monitored by the *TRCH* (Timing, Reset, Config & Health Controller), and the FPGA reports its internal status to the TRCH via the watchdog signal.
+SC-OBC Module A1 のシステムは *TRCH* (Timing, Reset, Config & Health Controller) によって監視されており、FPGA は watchdog 信号を介して内部状態を TRCH に報告します。
 
-NOTE: The monitoring by TRCH is disabled by default, so using the FPGA Watchdog feature is not mandatory.
+NOTE: TRCH による監視はデフォルトでは無効なので、FPGA Watchdog 機能の利用は必須ではありません。
 
 SEM Controller::
 
-The *SEM (Soft Error Mitigation) Controller* is a solution provided by _AMD_ for detecting and correcting errors that occur in the configuration memory of AMD FPGAs.
-The SC-OBC Module A1 FPGA integrates this functionality into the system and provides access to the SEM Controller's status through the System Monitor registers.
+*SEM (Soft Error Mitigation) Controller* は、AMD FPGA のコンフィギュレーションメモリに発生するエラーを検出および訂正するために _AMD_ が提供している機能です。
+SC-OBC Module A1 の FPGA はこの機能をシステムに統合しており、System Monitor レジスタを通じて SEM Controller の状態にアクセスできます。
 
 Board Health Monitor (BHM)::
 
-The *Board Health Monitor (BHM)* is a feature that enables easy retrieval of data from sensors mounted on the SC-OBC Module A1.
-The OBC module is equipped with two current and voltage monitors and three temperature sensors.
-The BHM allows automatic data acquisition from these sensors without requiring complex *I2C* operations in software.
+*Board Health Monitor (BHM)* は、SC-OBC Module A1 に搭載されたセンサのデータを容易に取得できる機能です。
+OBC モジュールには、2 個の電流 / 電圧モニタと 3 個の温度センサが搭載されています。
+BHM を使うと、ソフトウェアで複雑な *I2C* 操作を行わなくても、これらのセンサのデータを自動取得できます。
 
-==== System Monitor driver
+==== System Monitor ドライバ
 
-Currently, the following Zephyr driver APIs are provided for controlling the FPGA's System Monitor.
+現在、FPGA の System Monitor を制御するために、以下の Zephyr ドライバ API が提供されています。
 
 [[anchor-1]]
 .System Monitor Driver API List
 [options="header"]
 |=======================
-|Function|API|Summary|Parameters|Returns
-|FPGA Watchdog|sc_kick_wdt_timer|Toggle the FPGA Watchdog Timer||
-|SEM Controller|sc_sem_get_error_count|Get the SEM error count||Current SEM error count
-|Board Health Monitor (BHM)|sc_bhm_enable|Enable the monitoring by BHM +
-*NOTE:* Currently monitoring interval is fixed at 1 second||*0:* Success +
-*-ETIMEDOUT:* Timeout for sensor device initializing
-||sc_bhm_disable|Disable the monitoring by BHM||*0:* Success
-||sc_bhm_get_obc_temp|Get the on board temperature sensor value|*pos:* Position for sensor device +
-<Selectable parameter> +
+|機能|API|概要|パラメータ|戻り値
+|FPGA Watchdog|sc_kick_wdt_timer|FPGA Watchdog Timer をトグルする||
+|SEM Controller|sc_sem_get_error_count|SEM エラーカウントを取得する||現在の SEM エラーカウント
+|Board Health Monitor (BHM)|sc_bhm_enable|BHM による監視を有効にする +
+*NOTE:* 現在、監視間隔は 1 秒固定です||*0:* 成功 +
+*-ETIMEDOUT:* センサデバイス初期化タイムアウト
+||sc_bhm_disable|BHM による監視を無効にする||*0:* 成功
+||sc_bhm_get_obc_temp|オンボード温度センサ値を取得する|*pos:* センサデバイス位置 +
+<選択可能なパラメータ> +
 _SCOBC_A1_TEMP_1_ +
 _SCOBC_A1_TEMP_2_ +
 _SCOBC_A1_TEMP_3_ +
  +
-*temp:* Temperature [degree]|*0:* Success +
-*-ENODEV:* Wrong parameter +
-*-EAGAIN:* No updated sensor values
-||sc_bhm_get_xadc_temp|Get the FPGA die temperature sensor value|*temp:* Temperature [degree]|*0:* Success +
-*-EAGAIN:* No updated sensor values
-||sc_bhm_get_obc_cv|Get the on board Current/Voltage sensor value|*pos:* Position for sensor device +
-<Selectable parameter> +
+*temp:* 温度 [degree]|*0:* 成功 +
+*-ENODEV:* パラメータ不正 +
+*-EAGAIN:* センサ値がまだ更新されていない
+||sc_bhm_get_xadc_temp|FPGA ダイ温度センサ値を取得する|*temp:* 温度 [degree]|*0:* 成功 +
+*-EAGAIN:* センサ値がまだ更新されていない
+||sc_bhm_get_obc_cv|オンボード電流 / 電圧センサ値を取得する|*pos:* センサデバイス位置 +
+<選択可能なパラメータ> +
 _SCOBC_A1_1V0_SHUNT_ +
 _SCOBC_A1_1V0_BUS_ +
 _SCOBC_A1_1V8_SHUNT_ +
@@ -191,34 +192,34 @@ _SCOBC_A1_3V3_SYSB_BUS_ +
 _SCOBC_A1_3V3_IO_SHUNT_ +
 _SCOBC_A1_3V3_IO_BUS_ +
  +
-*cv:* Current sensor value [mA] / Voltage sensor value [mV] |*0:* Success +
-*-EAGAIN:* No updated sensor values
-||sc_bhm_get_xadc_cv|Get the FPGA voltage value|*pos:* Position for sensor device +
-<Selectable parameter> +
+*cv:* 電流センサ値 [mA] / 電圧センサ値 [mV] |*0:* 成功 +
+*-EAGAIN:* センサ値がまだ更新されていない
+||sc_bhm_get_xadc_cv|FPGA 電圧値を取得する|*pos:* センサデバイス位置 +
+<選択可能なパラメータ> +
 _SCOBC_A1_XADC_VCCINT_ +
 _SCOBC_A1_XADC_VCCAUX_ +
 _SCOBC_A1_XADC_VCCBRAM_ +
  +
-*cv:* FPGA Voltage value [mV] |*0:* Success +
-*-EAGAIN:* No updated sensor values
+*cv:* FPGA 電圧値 [mV] |*0:* 成功 +
+*-EAGAIN:* センサ値がまだ更新されていない
 |=======================
 
-These APIs are provided as an out-of-tree driver and are available in https://github.com/spacecubics/scobc-a1-sample/tree/main/drivers/misc/sc_fpga[System Monitor Driver].
+これらの API は out-of-tree ドライバとして提供されており、https://github.com/spacecubics/scobc-a1-sample/tree/main/drivers/misc/sc_fpga[System Monitor Driver] で利用できます。
 
-==== System Monitor sample
+==== System Monitor サンプル
 
-The sample application is available in https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/sysmon[System Monitor sample].
+サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/sysmon[System Monitor sample] にあります。
 
-=== Explain the sample code
+=== サンプルコードの説明
 
-==== Directory name
+==== ディレクトリ名
 
-The directory name and structure for the sample application can be chosen freely.
-In this example, we use the directory name `samples/sysmon`.
+サンプルアプリケーションのディレクトリ名や構成は自由に決められます。
+この例では、ディレクトリ名として `samples/sysmon` を使用します。
 
 ==== CMakeLists.txt
 
-A `CMakeLists.txt` file must be placed directly under the application directory.
+`CMakeLists.txt` ファイルは、アプリケーションディレクトリの直下に配置する必要があります。
 
 [source, cmake]
 ----
@@ -233,25 +234,25 @@ project(system-monitor)
 target_sources(app PRIVATE src/main.c)
 ----
 
-Here, the parts that need to be modified for each application are explained.
+ここでは、各アプリケーションごとに変更が必要となる箇所を説明します。
 
- * *project*: Specify the desired project name
- * *target_sources*: Specify the source code file(s)
+ * *project*: 任意のプロジェクト名を指定します
+ * *target_sources*: ソースコードファイルを指定します
 
 ==== prj.conf
 
-Additional Kconfig parameters required for running the application can be specified.
-In this sample, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`.
-For more information about `CONFIG_PICOLIBC_IO_FLOAT`, refer to https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT].
+アプリケーションの実行に必要な追加の Kconfig パラメータを指定できます。
+このサンプルでは、printf で float 型の温度データを表示するために `CONFIG_PICOLIBC_IO_FLOAT` を有効にする必要があります。
+`CONFIG_PICOLIBC_IO_FLOAT` の詳細は https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT] を参照してください。
 
 [source]
 ----
 CONFIG_PICOLIBC_IO_FLOAT=y
 ----
 
-==== Source code
+==== ソースコード
 
-The source code is shown below. Details will be explained separately.
+ソースコードを以下に示します。詳細は後で個別に説明します。
 
 [source, c]
 ----
@@ -304,18 +305,18 @@ end:
 }
 ----
 
-===== Include System Monitor driver header
+===== System Monitor ドライバのヘッダをインクルードする
 
-Include the header file for the _System Monitor_ driver.
+_System Monitor_ ドライバのヘッダファイルをインクルードします。
 
 [source, c]
 ----
 #include "sc_sysmon.h"
 ----
 
-===== Enable BHM
+===== BHM を有効にする
 
-Enable the System Monitor by FPGA _BHM_. If a negative value is returned, sensor initialization has failed.
+FPGA の _BHM_ による System Monitor を有効にします。負の値が返った場合、センサ初期化に失敗しています。
 
 [source, c]
 ----
@@ -326,21 +327,21 @@ Enable the System Monitor by FPGA _BHM_. If a negative value is returned, sensor
 	}
 ----
 
-===== Wait 1 second
+===== 1 秒待つ
 
-The current System Monitor driver API does not allow customization of the monitoring interval via BHM;
-it is fixed at 1 second. Therefore, wait for 1 second until the first data collection is completed.
+現在の System Monitor ドライバ API では、BHM による監視間隔を変更できず、1 秒固定です。
+そのため、最初のデータ取得が完了するまで 1 秒待ちます。
 
 [source, c]
 ----
 	k_sleep(K_SECONDS(1));
 ----
 
-===== Get the on board temperature sensor value
+===== オンボード温度センサ値を取得する
 
-Get the temperature data from onboard temperature sensor 1 and display it on the console.
-If a negative value is returned, it may indicate that the temperature sensor data has not been updated within the FPGA.
-If you'd like to get other values, try changing the _SCOBC_A1_TEMP_1_ to a different parameter of your choice, as referenced in <<anchor-1,Table 1. System Monitor Driver API List>>
+オンボード温度センサ 1 から温度データを取得し、コンソールに表示します。
+負の値が返った場合、FPGA 内で温度センサデータがまだ更新されていない可能性があります。
+他の値を取得したい場合は、<<anchor-1,Table 1. System Monitor Driver API List>> を参照し、_SCOBC_A1_TEMP_1_ を別のパラメータに変更してください。
 
 [source, c]
 ----
@@ -352,11 +353,11 @@ If you'd like to get other values, try changing the _SCOBC_A1_TEMP_1_ to a diffe
 		printf("On Board Temperature 1 : %.4f [deg]\n", (double)temp);
 ----
 
-===== Get the on board voltage sensor value
+===== オンボード電圧センサ値を取得する
 
-Get the _3V3SYS_ BUS voltage value data from onboard voltage sensor and display it on the console.
-If a negative value is returned, it may indicate that the voltage sensor data has not been updated within the FPGA.
-If you'd like to get other values, try changing the _SCOBC_A1_3V3_BUS_ to a different parameter of your choice, as referenced in <<anchor-1,Table 1. System Monitor Driver API List>>
+オンボード電圧センサから _3V3SYS_ BUS 電圧値を取得し、コンソールに表示します。
+負の値が返った場合、FPGA 内で電圧センサデータがまだ更新されていない可能性があります。
+他の値を取得したい場合は、<<anchor-1,Table 1. System Monitor Driver API List>> を参照し、_SCOBC_A1_3V3_BUS_ を別のパラメータに変更してください。
 
 [source, c]
 ----
@@ -368,20 +369,20 @@ If you'd like to get other values, try changing the _SCOBC_A1_3V3_BUS_ to a diff
 		printf("3V3SYS Bus voltage     : %d [mV]\n", bus);
 ----
 
-=== Open console
+=== コンソールを開く
 
-Connect the cable between your SC-OBC Module A1 and your PC, then open the console in a terminal:
+SC-OBC Module A1 と PC の間をケーブルで接続し、端末でコンソールを開いてください。
 
 [source, console]
 ----
 tio /dev/ttyUSB2
 ----
 
-CAUTION: To use the Zephyr console, bit3 (RX) and bit4 (TX) of DIP Switch (_SW1_) must be turned ON. If they are currently OFF, please switch them ON.
+CAUTION: Zephyr コンソールを使用するには、DIP スイッチ (_SW1_) の bit3 (RX) と bit4 (TX) を ON にする必要があります。現在 OFF の場合は、ON に切り替えてください。
 
-=== Build
+=== ビルド
 
-Specify the sample application directory where `CMakeLists.txt` and `prj.conf` are placed, and then build as shown below.
+`CMakeLists.txt` と `prj.conf` が配置されているサンプルアプリケーションのディレクトリを指定して、以下のようにビルドします。
 
 [source, console]
 ----
@@ -390,18 +391,18 @@ source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev scobc-a1-sample/samples/sysmon
 ----
 
-=== Flash
+=== 書き込み
 
-Next, we'll flash the SC-OBC Module A1:
+次に、SC-OBC Module A1 に書き込みます。
 
 [source, console]
 ----
 west flash
 ----
 
-=== Confirm
+=== 確認
 
-Confirm that the temperature from the on board temperature sensor and the _3V3SYS_ bus voltage are displayed on the console every second.
+オンボード温度センサの温度と _3V3SYS_ バス電圧が、1 秒ごとにコンソールへ表示されることを確認してください。
 
 [source, console]
 ----
@@ -414,4 +415,4 @@ On Board Temperature 1 : 28.5000 [deg]
 3V3SYS Bus voltage     : 3256 [mV]
 ----
 
-If you want to exit the tio console, first press `Ctrl + t`, followed by `q`.
+`tio` コンソールを終了したい場合は、まず `Ctrl + t` を押し、その後 `q` を押してください。
