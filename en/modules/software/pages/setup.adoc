@@ -4,9 +4,9 @@
 
 === Target Platform
 
-This document is focused on *Ubuntu 24.04 x86_64* systems.
+This document targets *Ubuntu 24.04 x86_64* systems.
 
-You can use any of the following setups:
+You can use any of the following environments.
 
 * A PC with Ubuntu installed
 * A system container (e.g., Incus)
