@@ -2,6 +2,8 @@
 * xref:setup.adoc[]
 * xref:run-zephyr-samples.adoc[]
 * xref:develop-zephyr-app.adoc[]
+** xref:develop-zephyr-app/hello-world.adoc[]
+** xref:develop-zephyr-app/system-monitor.adoc[]
 * xref:devicetree.adoc[]
 * xref:use-zephyr-drivers.adoc[]
 ** xref:use-zephyr-drivers/gpio.adoc[]
