@@ -100,7 +100,7 @@ Specify the sample application directory where `CMakeLists.txt` and `prj.conf` a
 [source, console]
 ----
 cd ~/myproject
-source ~/myproject/.venv/bin/activate
+source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev scobc-a1-sample/samples/hello_world
 ----
 
@@ -386,7 +386,7 @@ Specify the sample application directory where `CMakeLists.txt` and `prj.conf` a
 [source, console]
 ----
 cd ~/myproject
-source ~/myproject/.venv/bin/activate
+source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev scobc-a1-sample/samples/sysmon
 ----
 

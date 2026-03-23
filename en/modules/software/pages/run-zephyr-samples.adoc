@@ -20,7 +20,7 @@ If it is OFF, the LED will not blink.
 [source, console]
 ----
 cd ~/myproject
-source ~/myproject/.venv/bin/activate
+source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev zephyr/samples/basic/blinky
 ----
 
@@ -61,7 +61,7 @@ Then open the another terminal, and build the sample.
 [source, console]
 ----
 cd ~/myproject
-source ~/myproject/.venv/bin/activate
+source .venv/bin/activate
 west build -p always -b scobc_a1 --shield scobc_a1_dev zephyr/samples/hello_world
 ----
 
