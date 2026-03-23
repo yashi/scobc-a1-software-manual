@@ -1,7 +1,3 @@
-:sc_doc_base_url: https://spacecubics.github.io/sc-docs/
-:scobc_a1_product_manual_url: {sc_doc_base_url}scobc-a1-dev-product-manual/latest/
-:scobc_a1_dev_schematic_file_url: _attachments/SC-MPN-0056B_Dev_Board_Schematic_Rev1.pdf
-:scobc_a1_dev_schematic_url: {scobc_a1_product_manual_url}{scobc_a1_dev_schematic_file_url}
 = Use Zephyr Drivers
 
 == Introduction
