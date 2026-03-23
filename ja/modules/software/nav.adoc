@@ -4,3 +4,5 @@
 * xref:develop-zephyr-app.adoc[]
 * xref:devicetree.adoc[]
 * xref:use-zephyr-drivers.adoc[]
+** xref:use-zephyr-drivers/gpio.adoc[]
+** xref:use-zephyr-drivers/i2c.adoc[]
