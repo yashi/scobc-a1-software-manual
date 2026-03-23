@@ -1,4 +1,3 @@
-:scobc_a1_fpga_manual_sysmon_url: https://docs.spacecubics.com/scobc-a1-ja/latest/fpga/system_monitor.html
 = Develop Zephyr Applications
 
 == はじめに
@@ -132,7 +131,7 @@ Hello World! scobc_a1 Rev 2.0.0
 
 === System Monitor とは
 
-System Monitor の詳細は {scobc_a1_fpga_manual_sysmon_url}[System Monitor] (現時点では日本語のみ) にありますが、主に次の特徴があります。
+System Monitor の詳細は xref:scobc-a1-ja:fpga:system_monitor.adoc[] (現時点では日本語のみ) にありますが、主に次の特徴があります。
 
 FPGA Watchdog::
 

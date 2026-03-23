@@ -1,4 +1,3 @@
-:scobc_a1_fpga_manual_sysmon_url: https://docs.spacecubics.com/scobc-a1-ja/latest/fpga/system_monitor.html
 = Develop Zephyr Applications
 
 == Introduction
@@ -131,7 +130,7 @@ This section provides an example of building and running the *System Monitor* ap
 
 === What is the System Monitor
 
-Details of the System Monitor can be found in {scobc_a1_fpga_manual_sysmon_url}[System Monitor] (Now Japanese only), but it has the following characteristics:
+Details of the System Monitor can be found in xref:scobc-a1-ja:fpga:system_monitor.adoc[] (currently Japanese version only), but it has the following characteristics:
 
 FPGA Watchdog::
 
