@@ -1,6 +1,8 @@
 .Software
 * xref:setup.adoc[]
 * xref:run-zephyr-samples.adoc[]
+** xref:run-zephyr-samples/blinky.adoc[]
+** xref:run-zephyr-samples/hello-world.adoc[]
 * xref:develop-zephyr-app.adoc[]
 ** xref:develop-zephyr-app/hello-world.adoc[]
 ** xref:develop-zephyr-app/system-monitor.adoc[]
