@@ -1,7 +1,9 @@
 = Hello World sample
 
+include::partial$link-attributes.adoc[]
+
 This section provides an example of building and running the simplest Hello World application within a T2 topology-based repository.
-The sample application is available in https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/hello_world[Hello World sample].
+The sample application is available in {github-a1-sample-helloworld}[Hello World sample].
 
 == Explain the sample code
 

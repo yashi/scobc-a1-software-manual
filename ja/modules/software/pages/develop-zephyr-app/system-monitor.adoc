@@ -1,5 +1,7 @@
 = System Monitor サンプル
 
+include::scobc-a1:software:partial$link-attributes.adoc[]
+
 このセクションでは、T2 トポロジーベースのリポジトリ内で *System Monitor* アプリケーションをビルドして実行する例を示します。
 
 == System Monitor とは
@@ -76,11 +78,11 @@ _SCOBC_A1_XADC_VCCBRAM_ +
 *-EAGAIN:* センサ値がまだ更新されていない
 |=======================
 
-これらの API は out-of-tree ドライバとして提供されており、https://github.com/spacecubics/scobc-a1-sample/tree/main/drivers/misc/sc_fpga[System Monitor Driver] で利用できます。
+これらの API は out-of-tree ドライバとして提供されており、{github-a1-sample-fpga}[System Monitor Driver] で利用できます。
 
 === System Monitor サンプル
 
-サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/sysmon[System Monitor sample] にあります。
+サンプルアプリケーションは {github-a1-sample-sysmon}[System Monitor sample] にあります。
 
 == サンプルコードの説明
 
@@ -115,7 +117,7 @@ target_sources(app PRIVATE src/main.c)
 
 アプリケーションの実行に必要な追加の Kconfig パラメータを指定できます。
 このサンプルでは、printf で float 型の温度データを表示するために `CONFIG_PICOLIBC_IO_FLOAT` を有効にする必要があります。
-`CONFIG_PICOLIBC_IO_FLOAT` の詳細は https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT] を参照してください。
+`CONFIG_PICOLIBC_IO_FLOAT` の詳細は {zephyr-kconfig-picolibc-float}[CONFIG_PICOLIBC_IO_FLOAT] を参照してください。
 
 [source]
 ----

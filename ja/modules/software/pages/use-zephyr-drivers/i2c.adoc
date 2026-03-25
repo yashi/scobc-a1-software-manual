@@ -1,7 +1,9 @@
 = I2C ドライバサンプル
 
+include::scobc-a1:software:partial$link-attributes.adoc[]
+
 このアプリケーションでは、SC-OBC Module A1 用の *I2C* ドライバを使って、_Development Board_ 上のセンサから温度データを取得し、コンソールに表示します。
-サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/i2c[I2C sample] にあります。
+サンプルアプリケーションは {github-a1-sample-i2c}[I2C sample] にあります。
 
 == サンプルコードの説明
 
@@ -37,7 +39,7 @@ target_sources(app PRIVATE src/main.c)
 アプリケーションの実行に必要な追加の Kconfig パラメータを指定できます。
 この例では I2C を使用するため、`CONFIG_I2C=y` を設定する必要があります。
 また、printf で float 型の温度データを表示するため、`CONFIG_PICOLIBC_IO_FLOAT` を有効にする必要があります。
-`CONFIG_PICOLIBC_IO_FLOAT` の詳細は https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT] を参照してください。
+`CONFIG_PICOLIBC_IO_FLOAT` の詳細は {zephyr-kconfig-picolibc-float}[CONFIG_PICOLIBC_IO_FLOAT] を参照してください。
 
 [source]
 ----
@@ -103,7 +105,7 @@ end:
 I2C ドライバ API を使うには、対応するデバイス構造体を取得する必要があります。
 デバイス構造体を取得する API はいくつかありますが、このサンプルでは `DEVICE_DT_GET` と `DT_NODELABEL` を使っています。
 `DT_NODELABEL` に指定するラベル名は、DTS ファイルで定義されているラベルと一致している必要があります。
-Development Board の温度センサに接続されている I2C デバイスは、https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[Development Board 用 DTS オーバーレイファイル] で定義されています。
+Development Board の温度センサに接続されている I2C デバイスは、 {github-a1-sample-dev-board-overlay}[Development Board 用 DTS オーバーレイファイル] で定義されています。
 
 Development Board では 3 つの FPGA I2C コアが利用できますが、温度センサは `i2c0` に接続されています。
 

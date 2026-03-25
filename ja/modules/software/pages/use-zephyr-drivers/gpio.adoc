@@ -1,7 +1,9 @@
 = GPIO ドライバサンプル
 
+include::scobc-a1:software:partial$link-attributes.adoc[]
+
 このアプリケーションでは *GPIO* ドライバを使って、Development Board 上の LED を点滅させます。
-サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/blinky[Blinky sample] にあります。
+サンプルアプリケーションは {github-a1-sample-blinky}[Blinky sample] にあります。
 
 == サンプルコードの説明
 
@@ -116,7 +118,7 @@ GPIO と User IO ピンの対応は以下の通りで、`GPIO15` は Development
 |UIO2_06|GPIO6
 |=======================
 
-https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[Development Board 用 DTS オーバーレイファイル] を見ると、GPIO IP コアの `GPIO15` がデバイス名 `user_led_0` として定義されていることが分かります。
+{github-a1-sample-dev-board-overlay}[Development Board 用 DTS オーバーレイファイル] を見ると、GPIO IP コアの `GPIO15` がデバイス名 `user_led_0` として定義されていることが分かります。
 さらに、Zephyr の blinky サンプルで使われる `led0` が alias として割り当てられています。ただし、この alias は必須ではありません。
 
 [source, dts]

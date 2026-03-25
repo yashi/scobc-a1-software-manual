@@ -1,7 +1,9 @@
 = I2C Driver sample
 
+include::partial$link-attributes.adoc[]
+
 Using the *I2C* driver for the SC-OBC Module A1, this application retrieves temperature data from the sensor on the _Development Board_ and displays it on the console.
-The sample application is available in https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/i2c[I2C sample].
+The sample application is available in {github-a1-sample-i2c}[I2C sample].
 
 == Explain the sample code
 
@@ -37,7 +39,7 @@ Here, the parts that need to be modified for each application are explained.
 Additional Kconfig parameters required for running the application can be specified.
 As this example uses I2C, it is necessary to set `CONFIG_I2C=y`.
 And, to display temperature data of type float using printf, it is necessary to enable `CONFIG_PICOLIBC_IO_FLOAT`.
-For more information about `CONFIG_PICOLIBC_IO_FLOAT`, refer to https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PICOLIBC_IO_FLOAT[CONFIG_PICOLIBC_IO_FLOAT].
+For more information about `CONFIG_PICOLIBC_IO_FLOAT`, refer to {zephyr-kconfig-picolibc-float}[CONFIG_PICOLIBC_IO_FLOAT].
 
 [source]
 ----
@@ -103,7 +105,7 @@ end:
 To use the I2C driver API, it is necessary to obtain the corresponding device structure.
 There are several APIs available for retrieving a device structure, but in this sample, `DEVICE_DT_GET` and `DT_NODELABEL` are used.
 The label name specified in `DT_NODELABEL` must match the label defined in the DTS file.
-The I2C device connected to the temperature sensor on the Development Board is defined in https://github.com/spacecubics/scobc-a1-sample/blob/main/boards/shields/scobc_a1_dev/scobc_a1_dev.overlay[DTS overlay file for Development Board].
+The I2C device connected to the temperature sensor on the Development Board is defined in {github-a1-sample-dev-board-overlay}[DTS overlay file for Development Board].
 
 Although three FPGA I2C cores are available on the Development Board, the temperature sensor is connected to `i2c0`.
 

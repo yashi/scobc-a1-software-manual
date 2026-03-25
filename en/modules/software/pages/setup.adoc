@@ -1,5 +1,7 @@
 = Setup the Development Environment
 
+include::partial$link-attributes.adoc[]
+
 == Prepare the Software
 
 This section explains how to prepare the software development environment for the SC-OBC Module A1.
@@ -15,12 +17,8 @@ You can use any of the following environments.
 * A virtual machine (e.g., QEMU, VirtualBox, VMware)
 * Windows Subsystem for Linux (WSL) (see TIP)
 
-:zephyr-getting-started: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
-
 For Windows or macOS users, refer to {zephyr-getting-started}[the
 upstream Zephyr Getting Started Guide].
-
-:zephyr-install-dependencies: https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies
 
 [TIP]
 ====
@@ -157,15 +155,13 @@ detailed instructions on how to make the connection.
 
 NOTE: This document does not require a connection between the *MPLAB PICkit* and the *Platform Cable USB II*.
 
-:wsl-usb-connect: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
-
 === For WSL User
 CON2 on the SC-OBC Module A1 Development Board is the USB Micro-B
 DEBUG interface and is connected to the onboard FT4232H USB
 interface. It provides FPGA JTAG, CPU JTAG, FPGA UART, and TRCH UART.
 
 Use a USB cable to connect CON2 to your Windows PC, then attach it to
-WSL using {wsl-usb-connect}[Microsoft’s USB connection guide].
+WSL using {ms-wsl-usb-connect}[Microsoft’s USB connection guide].
 
 To attach the device to WSL, run `usbipd list` on Windows and
 identify the FTDI multi-port USB device for CON2 (VID:PID

@@ -1,7 +1,9 @@
 = Hello World サンプル
 
+include::scobc-a1:software:partial$link-attributes.adoc[]
+
 このセクションでは、T2 トポロジーベースのリポジトリ内で、最も単純な Hello World アプリケーションをビルドして実行する例を示します。
-サンプルアプリケーションは https://github.com/spacecubics/scobc-a1-sample/tree/main/samples/hello_world[Hello World sample] にあります。
+サンプルアプリケーションは {github-a1-sample-helloworld}[Hello World sample] にあります。
 
 == サンプルコードの説明
 

@@ -1,5 +1,7 @@
 = Device Tree
 
+include::partial$link-attributes.adoc[]
+
 Before introducing a sample application that uses a Zephyr driver, we believe it is helpful to first explain the Device Tree, as this will aid in understanding the source code more effectively.
 
 
@@ -49,4 +51,4 @@ Nodes represent hardware components (e.g., `/cpu`, `/memory`, `/soc/gpio@4002000
 Properties are key-value pairs describing attributes like addresses, interrupts, clocks, and more.
 
 This introduction is a starting point.
-For deeper understanding, consider reviewing the link:https://docs.zephyrproject.org/latest/build/dts/index.html[official Zephyr device tree documentation].
+For deeper understanding, consider reviewing the {zephyr-build-dts}[official Zephyr device tree documentation].

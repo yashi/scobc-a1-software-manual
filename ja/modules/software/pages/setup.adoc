@@ -1,5 +1,7 @@
 = Setup the Development Environment
 
+include::scobc-a1:software:partial$link-attributes.adoc[]
+
 == ソフトウェアの準備
 
 このセクションでは、SC-OBC Module A1 のソフトウェア開発環境の準備方法について説明します。
@@ -15,13 +17,9 @@
 * 仮想マシン (例: QEMU、VirtualBox、VMware)
 * Windows Subsystem for Linux (WSL)  (TIP を参照)
 
-:zephyr-getting-started: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
-
 Windows または macOS を使用している場合は、
 {zephyr-getting-started}[Zephyr の公式 Getting Started Guide]
 を参照してください。
-
-:zephyr-install-dependencies: https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies
 
 [TIP]
 ====
@@ -160,8 +158,6 @@ _SC-OBC Module A1 Development Board Product Manual_
 
 NOTE: このドキュメントでは、*MPLAB PICkit* と *Platform Cable USB II* の接続は必要ありません。
 
-:wsl-usb-connect: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
-
 === WSL 利用者向け
 SC-OBC Module A1 Development Board の CON2 は USB Micro-B の
 DEBUG インターフェースであり、オンボードの FT4232H USB
@@ -169,7 +165,7 @@ DEBUG インターフェースであり、オンボードの FT4232H USB
 CPU JTAG、FPGA UART、TRCH UART が利用できます。
 
 USB ケーブルで CON2 を Windows PC に接続し、その後
-{wsl-usb-connect}[Microsoft の USB 接続ガイド]に従って WSL に
+{ms-wsl-usb-connect}[Microsoft の USB 接続ガイド]に従って WSL に
 アタッチしてください。
 
 デバイスを WSL にアタッチするには、Windows 上で `usbipd list`
